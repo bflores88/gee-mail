@@ -1,19 +1,39 @@
 body{
     margin: 0px;
+    font-family: 'Quicksand', sans-serif;
 }
 
 
 
 #header{
-    background-color: rosybrown;
+    background-color: #2994b2;
+    font-family: 'Fahkwang', sans-serif;
     width: 100vw;
     height: 80px;
+    
 }
 
 #main{
     margin: 50px;
 }
 
+.fromDate{
+    background-color: #444f5a;
+    color: whitesmoke;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mailBody{
+    font-weight: normal;
+    display: none;
+}
+
 .messages{
-    border: 1px solid grey;
+    border: 1px dotted lightslategray;
+    padding: 0px 0px 10px 0px;
+}
+
+.subject{
+    font-weight: bolder;
 }

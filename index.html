@@ -1,35 +1,81 @@
 <html>
-	<head>
-		<script src="js/mail-generator.js"></script>
-		<link href="css/style.css" rel="stylesheet" media="screen">
-		<title>Gee-mail!</title>
-    <script>
-      window.onload = function(){
-        // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
-				// We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
-				var mailArray = window.geemails
 
-				for (var i=0; i<mailArray.length; i++){
+<head>
+	<script src="js/mail-generator.js"></script>
+	<link href="css/style.css" rel="stylesheet" media="screen">
+	<title>Gee-mail!</title>
+	<link href="https://fonts.googleapis.com/css?family=Fahkwang|Quicksand" rel="stylesheet">
+	<script>
+		window.onload = function () {
+			// ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
+			// We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
 
-					var messageBox = document.createElement('div');
-					messageBox.className = 'messages';
-					main.appendChild(messageBox);
+			//Declare variable
 
-					var mailDate = document.createElement('div');
-					mailDate.className = 'date';
-					mailDate.innerHTML = mailArray[i].date;
-					messageBox.appendChild(mailDate);
+			var mailArray = window.geemails
 
-					var mailSubject = document.createElement('div');
-					mailSubject.className = 'date';
-					mailSubject.innerHTML = mailArray[i].subject;
-					messageBox.appendChild(mailSubject);
+			//Sort the contents in the mail array by date from newest to oldest because why not cuz
+
+			mailArray.sort(function (a, b) {
+				var dateA = new Date(a.date),
+					dateB = new Date(b.date);
+				return dateA - dateB;
+			});
+
+			//For loop to consume data and such
+
+			for (var i = 0; i < mailArray.length; i++) {
+
+				var messageBox = document.createElement('div');
+				messageBox.className = 'messages';
+				main.appendChild(messageBox);
+
+				var fromDate = document.createElement('div');
+				fromDate.className = 'fromDate';
+				messageBox.appendChild(fromDate);
+
+				var mailFrom = document.createElement('div');
+				mailFrom.className = 'sender';
+				mailFrom.innerHTML = 'From: ' + mailArray[i].sender;
+				fromDate.appendChild(mailFrom);
+
+				var mailDate = document.createElement('div');
+				mailDate.className = 'date';
+				mailDate.innerHTML = mailArray[i].date;
+				fromDate.appendChild(mailDate);
+
+				var mailSubject = document.createElement('div');
+				mailSubject.className = 'subject';
+				mailSubject.innerHTML = 'Subject: ' + mailArray[i].subject;
+				messageBox.appendChild(mailSubject);
+
+				var mailBody = document.createElement('div');
+				mailBody.className = 'mailBody';
+				mailBody.innerHTML = mailArray[i].body;
+				mailSubject.appendChild(mailBody);
 
 
 
-				}
-				console.log(window.geemails);
-				
+			}
+
+			//Adds event listener to the subject line that will show the message content upon clicking.
+
+			// var subjectArray = document.getElementsByClassName('subject');
+
+			// for (var i = 0; i < subjectArray.length; i++) {
+			// 	subjectArray[i].addEventListener('click', showMessage);
+			// }
+
+			// function showMessage(){
+
+			// }
+
+
+
+
+
+		
+			console.log(window.geemails);
 
 
 
@@ -37,16 +83,19 @@
 
 
 
-      };
-    </script>
-	</head>
-	<body>
-		<header id="header">
-			Meow.
-		</header>
 
-		<div class="container" id="main">
+		};
+	</script>
+</head>
 
-		</div>
-	</body>
+<body>
+	<header id="header">
+		Meow.
+	</header>
+
+	<div class="container" id="main">
+
+	</div>
+</body>
+
 </html>
