@@ -1,0 +1,19 @@
+body{
+    margin: 0px;
+}
+
+
+
+#header{
+    background-color: rosybrown;
+    width: 100vw;
+    height: 80px;
+}
+
+#main{
+    margin: 50px;
+}
+
+.messages{
+    border: 1px solid grey;
+}

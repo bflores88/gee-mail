@@ -2,17 +2,51 @@
 	<head>
 		<script src="js/mail-generator.js"></script>
 		<link href="css/style.css" rel="stylesheet" media="screen">
+		<title>Gee-mail!</title>
     <script>
       window.onload = function(){
         // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
-        // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
-        
+				// We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
+				var mailArray = window.geemails
+
+				for (var i=0; i<mailArray.length; i++){
+
+					var messageBox = document.createElement('div');
+					messageBox.className = 'messages';
+					main.appendChild(messageBox);
+
+					var mailDate = document.createElement('div');
+					mailDate.className = 'date';
+					mailDate.innerHTML = mailArray[i].date;
+					messageBox.appendChild(mailDate);
+
+					var mailSubject = document.createElement('div');
+					mailSubject.className = 'date';
+					mailSubject.innerHTML = mailArray[i].subject;
+					messageBox.appendChild(mailSubject);
+
+
+
+				}
+				console.log(window.geemails);
+				
+
+
+
+
+
+
+
       };
     </script>
 	</head>
 	<body>
+		<header id="header">
+			Meow.
+		</header>
+
 		<div class="container" id="main">
-			Build Me!
+
 		</div>
 	</body>
 </html>
