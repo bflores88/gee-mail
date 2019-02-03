@@ -10,35 +10,75 @@
 			// ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
 			// We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
 
-			//Header content
-
-			geeMail.innerHTML = 'Gee-Mail';
-
-
-			//Set interval for mail to add
-
-			// idk what i'm doing
-
-
-
-
 			//Declare variable for mails
 
 			var mailArray = window.geemails
 
+			var totalMessages = 0;
+			totalMessages = mailArray.length;
+
+			ttlmess.innerHTML = totalMessages
+
+			//Set interval for mail to add
+
+			setInterval(addMessage, 5000);
+
+			function addMessage() {
+				var newMessage = getNewMessage();
+				mailArray.push(newMessage);
+
+				var messageBox = document.createElement('div');
+				messageBox.className = 'messages';
+				main.prepend(messageBox);
+
+				var fromDate = document.createElement('div');
+				fromDate.className = 'fromDate';
+				messageBox.appendChild(fromDate);
+
+				var mailFrom = document.createElement('div');
+				mailFrom.className = 'sender';
+				mailFrom.innerHTML = 'From: ' + mailArray[i].sender;
+				fromDate.appendChild(mailFrom);
+
+				var mailDate = document.createElement('div');
+				mailDate.className = 'date';
+				mailDate.innerHTML = mailArray[i].date;
+				fromDate.appendChild(mailDate);
+
+				var mailSubject = document.createElement('div');
+				mailSubject.className = 'subject';
+				mailSubject.innerHTML = 'Subject: ' + mailArray[i].subject;
+				messageBox.appendChild(mailSubject);
+
+				var mailBody = document.createElement('div');
+				mailBody.className = 'mailBody';
+				mailBody.innerHTML = mailArray[i].body;
+				mailSubject.appendChild(mailBody);
+
+
+
+				//Content for sidecount container
+				totalMessages = mailArray.length;
+				ttlmess.innerHTML = totalMessages
+
+				console.log(totalMessages);
+
+
+			}
+
+
+
+
 			//Sort the contents in the mail array by date from newest to oldest because why not cuz
 
 			mailArray.sort(function (a, b) {
-				var dateA = new Date(a.date),
-					dateB = new Date(b.date);
+				var dateA = (a.date),
+					dateB = (b.date);
 				return dateA - dateB;
 			});
 
 			//For loop to consume data and such
 
-			var totalMessages = 0;
-			totalMessages = mailArray.length;
-			console.log(totalMessages);
 
 
 			for (var i = 0; i < mailArray.length; i++) {
@@ -94,11 +134,6 @@
 
 			}
 
-			//Content for sidecount container
-
-			ttlmess.innerHTML = totalMessages
-
-			
 
 			console.log(window.geemails);
 
@@ -115,7 +150,7 @@
 
 <body>
 	<header id="header">
-		<h1 id='geeMail'></h1>
+		<h1 id='geeMail'>Gee-mail</h1>
 	</header>
 
 	<div class="container" id="maincontainer">
@@ -124,18 +159,18 @@
 			<h2 id="inboxttl">INBOX</h2>
 
 			<div class="statbox">
-					<p class="status">Total Messages</p>
-					<p class="statcount" id="ttlmess"></p>
+				<p class="status">Total Messages</p>
+				<p class="statcount" id="ttlmess"></p>
 			</div>
 
 			<div class="statbox">
-					<p class="status">Unread</p>
-					<p class="statcount" id="unread"></p>
+				<p class="status">Unread</p>
+				<p class="statcount" id="unread"></p>
 			</div>
 
 			<div class="statbox">
-					<p class="status">Read</p>
-					<p class="statcount" id="read"></p>
+				<p class="status">Read</p>
+				<p class="statcount" id="read"></p>
 			</div>
 
 
@@ -143,7 +178,7 @@
 
 		<div class="container" id="main"></div>
 
-</div>
+	</div>
 </body>
 
 </html>
