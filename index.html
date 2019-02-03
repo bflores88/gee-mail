@@ -3,6 +3,7 @@
 <head>
 	<script src="js/mail-generator.js"></script>
 	<link href="css/style.css" rel="stylesheet" media="screen">
+	<link rel="icon" href="assets/favicon.ico">
 	<title>Gee-mail!</title>
 	<link href="https://fonts.googleapis.com/css?family=Fahkwang|Quicksand" rel="stylesheet">
 	<script>
@@ -13,19 +14,23 @@
 			//Declare variable for mails
 
 			var mailArray = window.geemails
+			var newMailArray = mailArray;
 
+			//content for sidecounter
 			var totalMessages = 0;
-			totalMessages = mailArray.length;
+			totalMessages = newMailArray.length;
 
 			ttlmess.innerHTML = totalMessages
+			// read.innerHTML = 0;
+			// unread.innerHTML = totalMessages - read.innerHTML;
+
 
 			//Set interval for mail to add
-
 			setInterval(addMessage, 5000);
 
 			function addMessage() {
 				var newMessage = getNewMessage();
-				mailArray.push(newMessage);
+				newMailArray.push(newMessage);
 
 				var messageBox = document.createElement('div');
 				messageBox.className = 'messages';
@@ -37,51 +42,60 @@
 
 				var mailFrom = document.createElement('div');
 				mailFrom.className = 'sender';
-				mailFrom.innerHTML = 'From: ' + mailArray[i].sender;
+				mailFrom.innerHTML = 'From: ' + newMessage.sender;
 				fromDate.appendChild(mailFrom);
 
 				var mailDate = document.createElement('div');
 				mailDate.className = 'date';
-				mailDate.innerHTML = mailArray[i].date;
+				mailDate.innerHTML = newMessage.date;
 				fromDate.appendChild(mailDate);
 
 				var mailSubject = document.createElement('div');
 				mailSubject.className = 'subject';
-				mailSubject.innerHTML = 'Subject: ' + mailArray[i].subject;
+				mailSubject.innerHTML = 'Subject: ' + newMessage.subject;
 				messageBox.appendChild(mailSubject);
 
 				var mailBody = document.createElement('div');
 				mailBody.className = 'mailBody';
-				mailBody.innerHTML = mailArray[i].body;
+				mailBody.innerHTML = newMessage.body;
 				mailSubject.appendChild(mailBody);
+
+				var messageArray = document.getElementsByClassName('messages');
+
+				for (var i = 0; i < messageArray.length; i++) {
+					messageArray[i].addEventListener('click', showMessage);
+				}
+
+				function showMessage() {
+
+					var showMess = this.querySelectorAll('.mailBody')[0];
+					if (showMess.style.display === 'none') {
+						showMess.style.display = 'block';
+						this.style.fontWeight = 'normal';
+					} else {
+						showMess.style.display = 'none';
+					}
+
+				}
 
 
 
 				//Content for sidecount container
-				totalMessages = mailArray.length;
-				ttlmess.innerHTML = totalMessages
-
-				console.log(totalMessages);
-
+				totalMessages = newMailArray.length;
+				ttlmess.innerHTML = totalMessages;
+				// unread.innerHTML = totalMessages - read.innerHTML;
 
 			}
 
-
-
-
 			//Sort the contents in the mail array by date from newest to oldest because why not cuz
-
-			mailArray.sort(function (a, b) {
+			newMailArray.sort(function (a, b) {
 				var dateA = (a.date),
 					dateB = (b.date);
 				return dateA - dateB;
 			});
 
 			//For loop to consume data and such
-
-
-
-			for (var i = 0; i < mailArray.length; i++) {
+			for (var i = 0; i < newMailArray.length; i++) {
 
 				var messageBox = document.createElement('div');
 				messageBox.className = 'messages';
@@ -93,29 +107,27 @@
 
 				var mailFrom = document.createElement('div');
 				mailFrom.className = 'sender';
-				mailFrom.innerHTML = 'From: ' + mailArray[i].sender;
+				mailFrom.innerHTML = 'From: ' + newMailArray[i].sender;
 				fromDate.appendChild(mailFrom);
 
 				var mailDate = document.createElement('div');
 				mailDate.className = 'date';
-				mailDate.innerHTML = mailArray[i].date;
+				mailDate.innerHTML = newMailArray[i].date;
 				fromDate.appendChild(mailDate);
 
 				var mailSubject = document.createElement('div');
 				mailSubject.className = 'subject';
-				mailSubject.innerHTML = 'Subject: ' + mailArray[i].subject;
+				mailSubject.innerHTML = 'Subject: ' + newMailArray[i].subject;
 				messageBox.appendChild(mailSubject);
 
 				var mailBody = document.createElement('div');
 				mailBody.className = 'mailBody';
-				mailBody.innerHTML = mailArray[i].body;
+				mailBody.innerHTML = newMailArray[i].body;
 				mailSubject.appendChild(mailBody);
-
 
 			}
 
 			//Adds event listener to the messages box that will show the message content upon clicking.
-
 			var subjectArray = document.getElementsByClassName('messages');
 
 			for (var i = 0; i < subjectArray.length; i++) {
@@ -134,15 +146,7 @@
 
 			}
 
-
-			console.log(window.geemails);
-
-
-
-
-
-
-
+			console.log(newMailArray);
 
 		};
 	</script>
@@ -163,14 +167,14 @@
 				<p class="statcount" id="ttlmess"></p>
 			</div>
 
-			<div class="statbox">
+			<div class="countstat">
 				<p class="status">Unread</p>
 				<p class="statcount" id="unread"></p>
 			</div>
 
-			<div class="statbox">
+			<div class="countstat">
 				<p class="status">Read</p>
-				<p class="statcount" id="read"></p>
+				<p class="statcountRead" id="read"></p>
 			</div>
 
 
