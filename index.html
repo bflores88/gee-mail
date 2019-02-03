@@ -13,7 +13,13 @@
 			//Header content
 
 			geeMail.innerHTML = 'Gee-Mail';
-			
+
+
+			//Set interval for mail to add
+
+			// idk what i'm doing
+
+
 
 
 			//Declare variable for mails
@@ -29,6 +35,11 @@
 			});
 
 			//For loop to consume data and such
+
+			var totalMessages = 0;
+			totalMessages = mailArray.length;
+			console.log(totalMessages);
+
 
 			for (var i = 0; i < mailArray.length; i++) {
 
@@ -61,7 +72,6 @@
 				mailSubject.appendChild(mailBody);
 
 
-
 			}
 
 			//Adds event listener to the messages box that will show the message content upon clicking.
@@ -84,6 +94,11 @@
 
 			}
 
+			//Content for sidecount container
+
+			ttlmess.innerHTML = totalMessages
+
+			
 
 			console.log(window.geemails);
 
@@ -105,10 +120,29 @@
 
 	<div class="container" id="maincontainer">
 
-		<div class="container" id="sidecount"></div>
+		<div class="container" id="sidecount">
+			<h2 id="inboxttl">INBOX</h2>
+
+			<div class="statbox">
+					<p class="status">Total Messages</p>
+					<p class="statcount" id="ttlmess"></p>
+			</div>
+
+			<div class="statbox">
+					<p class="status">Unread</p>
+					<p class="statcount" id="unread"></p>
+			</div>
+
+			<div class="statbox">
+					<p class="status">Read</p>
+					<p class="statcount" id="read"></p>
+			</div>
+
+
+		</div>
 
 		<div class="container" id="main"></div>
-		
+
 </div>
 </body>
 
