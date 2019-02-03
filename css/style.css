@@ -6,20 +6,46 @@ body{
 
 
 #header{
-    background-color: #2994b2;
+    background-color: #dbe2ef;
     font-family: 'Fahkwang', sans-serif;
     width: 100vw;
     height: 80px;
-    
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#maincontainer{
+    display: flex;
+    justify-content: space-evenly;
+
 }
 
 #main{
-    margin: 50px;
+    margin: 50px 10px 50px 0px;
+    width:78vw;
+}
+
+#sidecount{
+    margin-top: 50px;
+    margin-left: 10px;
+    width: 15vw;
+
+}
+
+
+.messages{
+    margin: 0px 0px 10px 0px;
+    border: 1px solid lightslategray;
+    font-weight: 900;
 }
 
 .fromDate{
-    background-color: #444f5a;
-    color: whitesmoke;
+    font-family: 'Quicksand', sans-serif;
+    background-color: #dbe2ef;
+    color: #112d4e;
+    padding: 5px 5px;
     display: flex;
     justify-content: space-between;
 }
@@ -27,13 +53,12 @@ body{
 .mailBody{
     font-weight: normal;
     display: none;
-}
-
-.messages{
-    border: 1px dotted lightslategray;
-    padding: 0px 0px 10px 0px;
+    padding: 10px 10px;
 }
 
 .subject{
-    font-weight: bolder;
+    padding: 5 5 5 5;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }

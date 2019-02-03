@@ -10,7 +10,13 @@
 			// ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
 			// We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
 
-			//Declare variable
+			//Header content
+
+			geeMail.innerHTML = 'Gee-Mail';
+			
+
+
+			//Declare variable for mails
 
 			var mailArray = window.geemails
 
@@ -58,23 +64,27 @@
 
 			}
 
-			//Adds event listener to the subject line that will show the message content upon clicking.
+			//Adds event listener to the messages box that will show the message content upon clicking.
 
-			// var subjectArray = document.getElementsByClassName('subject');
+			var subjectArray = document.getElementsByClassName('messages');
 
-			// for (var i = 0; i < subjectArray.length; i++) {
-			// 	subjectArray[i].addEventListener('click', showMessage);
-			// }
+			for (var i = 0; i < subjectArray.length; i++) {
+				subjectArray[i].addEventListener('click', showMessage);
+			}
 
-			// function showMessage(){
+			function showMessage() {
 
-			// }
+				var showMess = this.querySelectorAll('.mailBody')[0];
+				if (showMess.style.display === 'none') {
+					showMess.style.display = 'block';
+					this.style.fontWeight = 'normal';
+				} else {
+					showMess.style.display = 'none';
+				}
+
+			}
 
 
-
-
-
-		
 			console.log(window.geemails);
 
 
@@ -90,12 +100,16 @@
 
 <body>
 	<header id="header">
-		Meow.
+		<h1 id='geeMail'></h1>
 	</header>
 
-	<div class="container" id="main">
+	<div class="container" id="maincontainer">
 
-	</div>
+		<div class="container" id="sidecount"></div>
+
+		<div class="container" id="main"></div>
+		
+</div>
 </body>
 
 </html>
