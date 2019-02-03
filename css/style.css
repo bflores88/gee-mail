@@ -1,6 +1,9 @@
+
+
 body{
     margin: 0px;
     font-family: 'Quicksand', sans-serif;
+    cursor: nw-resize;
 }
 
 
