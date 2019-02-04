@@ -16,25 +16,43 @@
 			var mailArray = window.geemails
 			var newMailArray = mailArray;
 
+			var unreadCount = 0;
+			var totalMessages = 0;
+
 			//content for sidecounter
 
-			function counterUpdate(ummArray){
-				var totalMessages = 0;
-				totalMessages = ummArray.length;
-				ttlmess.innerHTML = totalMessages
+			function initializeCounter(messageCount){
+				totalMessages = messageCount
+				ttlmess.innerHTML = totalMessages;
+
+				unreadCount = messageCount;
+				unread.innerHTML = unreadCount;
 			}
 
-			counterUpdate(newMailArray);
-		
-			// read.innerHTML = 0;
-			// unread.innerHTML = totalMessages - read.innerHTML;
+			function messageReceived() {
+				totalMessages++;
+				ttlmess.innerHTML = totalMessages;
+
+				unreadCount++;
+				unread.innerHTML = unreadCount;
+			}
+
+			function messageRead() {
+				unreadCount--;
+				unread.innerHTML = unreadCount;
+			}
+
+			function totalMessagesUpdate(messageCount) {
+				totalMessages = messageCount;
+				ttlmess.innerHTML = totalMessages
+			}
 
 			//function to add messages
 
 			function createMessageBox(messageObject) {
 
 				var messageBox = document.createElement('div');
-				messageBox.className = 'messages';
+				messageBox.className = 'message';
 				main.prepend(messageBox);
 
 				var fromDate = document.createElement('div');
@@ -60,48 +78,39 @@
 				mailBody.className = 'mailBody';
 				mailBody.innerHTML = messageObject.body;
 				mailSubject.appendChild(mailBody);
+
+				setClickListener(messageBox);				
 			}
 
+			function setClickListener(message) {
+				message.addEventListener('click', showMessage);
+			}
 
-			//Sort the contents in the mail array by date from newest to oldest
+			function showMessage() {
+
+				var showMess = this.querySelectorAll('.mailBody')[0];
+				if (showMess.style.display === 'none') {
+					showMess.style.display = 'block';
+					this.style.fontWeight = 'normal';
+				} else {
+					showMess.style.display = 'none';
+				}
+
+			}
+
+			//Sort the contents in the mail array by date from newest to oldest			
 
 			newMailArray.sort(function (a, b) {
 				return a.date - b.date;
 			});
 
-			newMailArray.reverse()
-
 			//For loop to consume data and such
 			for (var i = 0; i < newMailArray.length; i++) {
-
 				createMessageBox(newMailArray[i]);
-
 			}
 
-			//Adds event listener to the messages box that will show the message content upon clicking.
+			initializeCounter(newMailArray.length);
 
-			var subjectArray = document.getElementsByClassName('messages');
-
-			function clickMessage(anArray) {
-
-				for (var i = 0; i < anArray.length; i++) {
-					anArray[i].addEventListener('click', showMessage);
-				}
-
-				function showMessage() {
-
-					var showMess = this.querySelectorAll('.mailBody')[0];
-					if (showMess.style.display === 'none') {
-						showMess.style.display = 'block';
-						this.style.fontWeight = 'normal';
-					} else {
-						showMess.style.display = 'none';
-					}
-
-				}
-			}
-
-			clickMessage(subjectArray);
 
 			//Set interval for mail to add more messages
 			setInterval(addMessage, 10000);
@@ -116,13 +125,8 @@
 				//create new message box
 				createMessageBox(newMessage);
 
-				//Update event listener
-				subArray = document.getElementsByClassName('messages');
-				clickMessage(subArray);
-
 				//Update sidecount container
-				counterUpdate(newMailArray);
-
+				messageReceived();
 			}
 
 
@@ -141,32 +145,33 @@
 		<h1 id='geeMail'>Gee-mail!!!</h1>
 	</header>
 
-	<div class="container" id="maincontainer">
-
-		<div class="container" id="sidecount">
-			<h2 id="inboxttl">INBOX</h2>
-
-			<div class="statbox">
-				<p class="status">Total Messages</p>
-				<p class="statcount" id="ttlmess">0</p>
-			</div>
-
-			<div class="countstat">
-				<p class="status">Unread</p>
-				<p class="statcount" id="unread">0</p>
-			</div>
-
-			<div class="countstat">
-				<p class="status">Read</p>
-				<p class="statcountRead" id="read">0</p>
-			</div>
 
 
+	<div class="container" id="sidecount">
+		<img src="assets/carcurse.png" alt="">
+		<h2 id="inboxttl">INBOX</h2>
+
+		<div class="statbox">
+			<p class="status">Total Messages</p>
+			<p class="statcount" id="ttlmess">0</p>
 		</div>
 
-		<div class="container" id="main"></div>
+		<div class="countstat">
+			<p class="status">Unread</p>
+			<p class="statcount" id="unread">0</p>
+		</div>
+
+		<div class="countstat">
+			<p class="status">Read</p>
+			<p class="statcountRea" id="read">0</p>
+		</div>
+
 
 	</div>
+
+	<div class="container" id="main"></div>
+
+
 </body>
 
 </html>

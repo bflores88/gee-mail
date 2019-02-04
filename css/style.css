@@ -5,6 +5,7 @@ body{
     font-family: 'Quicksand', sans-serif;
     cursor: crosshair;
     background-color: #fcf5ee;
+
 }
 
 
@@ -16,25 +17,22 @@ header{
     height: 80px;
     text-align: center;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     flex-direction: column;
 }
 
 header:hover{
     font-size: 50px;
     color: white;
-    
-}
-
-#maincontainer{
-    display: flex;
-    justify-content: space-evenly;
 
 }
+
 
 #main{
     margin: 50px 10px 50px 0px;
     width:78vw;
+    position: absolute;
+    right: 10px;
 }
 
 #sidecount{
@@ -42,11 +40,12 @@ header:hover{
     margin-left: 10px;
     width: 15vw;
     padding-top: 50px;
+    position: fixed;
 
 }
 
 
-.messages{
+.message{
     margin: 0px 0px 10px 0px;
     border: 1px solid lightslategray;
     font-weight: 900;
