@@ -17,10 +17,15 @@
 			var newMailArray = mailArray;
 
 			//content for sidecounter
-			var totalMessages = 0;
-			totalMessages = newMailArray.length;
 
-			ttlmess.innerHTML = totalMessages
+			function counterUpdate(ummArray){
+				var totalMessages = 0;
+				totalMessages = ummArray.length;
+				ttlmess.innerHTML = totalMessages
+			}
+
+			counterUpdate(newMailArray);
+		
 			// read.innerHTML = 0;
 			// unread.innerHTML = totalMessages - read.innerHTML;
 
@@ -99,31 +104,32 @@
 			clickMessage(subjectArray);
 
 			//Set interval for mail to add more messages
-			setInterval(addMessage, 5000);
+			setInterval(addMessage, 10000);
 
 			function addMessage() {
-				
-				var newMessageArr = [];
+
 				var newMessage = getNewMessage();
-				newMessageArr.push(newMessage);
+
+				//push to check messages appearing correctly
 				newMailArray.push(newMessage);
 
-				for (var i = 0; i <newMessageArr.length; i++) {
-					createMessageBox(newMessageArr[i]);
-				}
-	
+				//create new message box
+				createMessageBox(newMessage);
 
+				//Update event listener
+				subArray = document.getElementsByClassName('messages');
+				clickMessage(subArray);
 
-				var messageArrayNew = document.getElementsByClassName('messages');
-				clickMessage(messageArrayNew);
+				//Update sidecount container
+				counterUpdate(newMailArray);
 
 			}
 
-			//Content for sidecount container
-			totalMessages = newMailArray.length;
-			ttlmess.innerHTML = totalMessages;
-			// unread.innerHTML = totalMessages - read.innerHTML;
 
+
+
+
+			//Console log mail array to check messages are correct
 			console.log(newMailArray);
 
 		};
@@ -132,7 +138,7 @@
 
 <body>
 	<header id="header">
-		<h1 id='geeMail'>Gee-mail</h1>
+		<h1 id='geeMail'>Gee-mail!!!</h1>
 	</header>
 
 	<div class="container" id="maincontainer">
@@ -142,17 +148,17 @@
 
 			<div class="statbox">
 				<p class="status">Total Messages</p>
-				<p class="statcount" id="ttlmess"></p>
+				<p class="statcount" id="ttlmess">0</p>
 			</div>
 
 			<div class="countstat">
 				<p class="status">Unread</p>
-				<p class="statcount" id="unread"></p>
+				<p class="statcount" id="unread">0</p>
 			</div>
 
 			<div class="countstat">
 				<p class="status">Read</p>
-				<p class="statcountRead" id="read"></p>
+				<p class="statcountRead" id="read">0</p>
 			</div>
 
 

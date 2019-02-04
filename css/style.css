@@ -3,13 +3,14 @@
 body{
     margin: 0px;
     font-family: 'Quicksand', sans-serif;
-    cursor: nw-resize;
+    cursor: crosshair;
+    background-color: #fcf5ee;
 }
 
 
 
-#header{
-    background-color: #dbe2ef;
+header{
+    background-color: #65c6c4;
     font-family: 'Fahkwang', sans-serif;
     width: 100vw;
     height: 80px;
@@ -17,6 +18,12 @@ body{
     display: flex;
     justify-content: center;
     flex-direction: column;
+}
+
+header:hover{
+    font-size: 50px;
+    color: white;
+    
 }
 
 #maincontainer{
@@ -47,7 +54,7 @@ body{
 
 .fromDate{
     font-family: 'Quicksand', sans-serif;
-    background-color: #dbe2ef;
+    background-color: #65c6c4;
     color: #112d4e;
     padding: 5px 5px;
     display: flex;
@@ -58,6 +65,10 @@ body{
     font-weight: normal;
     display: none;
     padding: 10px 10px;
+}
+
+.mailBody:hover{
+    background-color: aquamarine;
 }
 
 .statbox{
@@ -72,6 +83,11 @@ body{
     flex-direction: column;
 }
 
+.subject:hover{
+    background-color: lightpink;
+}
+
 .countstat{
-    display: none;
+    display: flex;
+    justify-content: space-between;
 }
