@@ -79,10 +79,17 @@
 				mailBody.innerHTML = messageObject.body;
 				mailSubject.appendChild(mailBody);
 
+				var readDiv = document.createElement('div');
+				readDiv.className = 'readStatus';
+				readDiv.innerHTML = messageObject.read;
+				mailSubject.appendChild(readDiv);
+
+
 				setClickListener(messageBox);				
 			}
 
 			function setClickListener(message) {
+				
 				message.addEventListener('click', showMessage);
 			}
 
@@ -95,6 +102,7 @@
 				} else {
 					showMess.style.display = 'none';
 				}
+				
 
 			}
 
@@ -104,8 +112,9 @@
 				return a.date - b.date;
 			});
 
-			//For loop to consume data and such
+			//For loop to consume data and such... initialize counter (orignal number)
 			for (var i = 0; i < newMailArray.length; i++) {
+				newMailArray[i].read = false;
 				createMessageBox(newMailArray[i]);
 			}
 
@@ -129,10 +138,6 @@
 				messageReceived();
 			}
 
-
-
-
-
 			//Console log mail array to check messages are correct
 			console.log(newMailArray);
 
@@ -146,9 +151,8 @@
 	</header>
 
 
-
 	<div class="container" id="sidecount">
-		<img src="assets/carcurse.png" alt="">
+		<img src="assets/carcurse.png" alt="" title="Quack!!">
 		<h2 id="inboxttl">INBOX</h2>
 
 		<div class="statbox">
@@ -165,8 +169,6 @@
 			<p class="status">Read</p>
 			<p class="statcountRea" id="read">0</p>
 		</div>
-
-
 	</div>
 
 	<div class="container" id="main"></div>

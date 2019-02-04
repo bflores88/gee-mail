@@ -16,6 +16,8 @@ header{
     width: 100vw;
     height: 80px;
     text-align: center;
+    position: fixed;
+    overflow: hidden;
     display: flex;
     justify-content: space-evenly;
     flex-direction: column;
@@ -29,14 +31,19 @@ header:hover{
 
 
 #main{
-    margin: 50px 10px 50px 0px;
-    width:78vw;
+    top: 120px;
+    margin-left: 200px;
+    margin-top: 0px;
+    margin: 10px 10px 50px 0px;
+    width: 78vw;
+    height: 550px;
     position: absolute;
+    overflow-y: scroll;
     right: 10px;
 }
 
 #sidecount{
-    margin-top: 50px;
+    margin-top: 100px;
     margin-left: 10px;
     width: 15vw;
     padding-top: 50px;
@@ -44,11 +51,14 @@ header:hover{
 
 }
 
-
 .message{
     margin: 0px 0px 10px 0px;
+    border-radius: 5px 0px 25px 0px; 
+    overflow: hidden;
+    z-index: 1;
     border: 1px solid lightslategray;
     font-weight: 900;
+
 }
 
 .fromDate{
@@ -68,6 +78,10 @@ header:hover{
 
 .mailBody:hover{
     background-color: aquamarine;
+}
+
+.readStatus{
+    display: none;
 }
 
 .statbox{
