@@ -24,13 +24,9 @@
 			// read.innerHTML = 0;
 			// unread.innerHTML = totalMessages - read.innerHTML;
 
+			//function to add messages
 
-			//Set interval for mail to add
-			setInterval(addMessage, 5000);
-
-			function addMessage() {
-				var newMessage = getNewMessage();
-				newMailArray.push(newMessage);
+			function createMessageBox(messageObject) {
 
 				var messageBox = document.createElement('div');
 				messageBox.className = 'messages';
@@ -42,28 +38,49 @@
 
 				var mailFrom = document.createElement('div');
 				mailFrom.className = 'sender';
-				mailFrom.innerHTML = 'From: ' + newMessage.sender;
+				mailFrom.innerHTML = 'From: ' + messageObject.sender;
 				fromDate.appendChild(mailFrom);
 
 				var mailDate = document.createElement('div');
 				mailDate.className = 'date';
-				mailDate.innerHTML = newMessage.date;
+				mailDate.innerHTML = messageObject.date;
 				fromDate.appendChild(mailDate);
 
 				var mailSubject = document.createElement('div');
 				mailSubject.className = 'subject';
-				mailSubject.innerHTML = 'Subject: ' + newMessage.subject;
+				mailSubject.innerHTML = 'Subject: ' + messageObject.subject;
 				messageBox.appendChild(mailSubject);
 
 				var mailBody = document.createElement('div');
 				mailBody.className = 'mailBody';
-				mailBody.innerHTML = newMessage.body;
+				mailBody.innerHTML = messageObject.body;
 				mailSubject.appendChild(mailBody);
+			}
 
-				var messageArray = document.getElementsByClassName('messages');
 
-				for (var i = 0; i < messageArray.length; i++) {
-					messageArray[i].addEventListener('click', showMessage);
+			//Sort the contents in the mail array by date from newest to oldest
+
+			newMailArray.sort(function (a, b) {
+				return a.date - b.date;
+			});
+
+			newMailArray.reverse()
+
+			//For loop to consume data and such
+			for (var i = 0; i < newMailArray.length; i++) {
+
+				createMessageBox(newMailArray[i]);
+
+			}
+
+			//Adds event listener to the messages box that will show the message content upon clicking.
+
+			var subjectArray = document.getElementsByClassName('messages');
+
+			function clickMessage(anArray) {
+
+				for (var i = 0; i < anArray.length; i++) {
+					anArray[i].addEventListener('click', showMessage);
 				}
 
 				function showMessage() {
@@ -77,74 +94,35 @@
 					}
 
 				}
-
-
-
-				//Content for sidecount container
-				totalMessages = newMailArray.length;
-				ttlmess.innerHTML = totalMessages;
-				// unread.innerHTML = totalMessages - read.innerHTML;
-
 			}
 
-			//Sort the contents in the mail array by date from newest to oldest because why not cuz
-			newMailArray.sort(function (a, b) {
-				var dateA = (a.date),
-					dateB = (b.date);
-				return dateA - dateB;
-			});
+			clickMessage(subjectArray);
 
-			//For loop to consume data and such
-			for (var i = 0; i < newMailArray.length; i++) {
+			//Set interval for mail to add more messages
+			setInterval(addMessage, 5000);
 
-				var messageBox = document.createElement('div');
-				messageBox.className = 'messages';
-				main.appendChild(messageBox);
+			function addMessage() {
+				
+				var newMessageArr = [];
+				var newMessage = getNewMessage();
+				newMessageArr.push(newMessage);
+				newMailArray.push(newMessage);
 
-				var fromDate = document.createElement('div');
-				fromDate.className = 'fromDate';
-				messageBox.appendChild(fromDate);
-
-				var mailFrom = document.createElement('div');
-				mailFrom.className = 'sender';
-				mailFrom.innerHTML = 'From: ' + newMailArray[i].sender;
-				fromDate.appendChild(mailFrom);
-
-				var mailDate = document.createElement('div');
-				mailDate.className = 'date';
-				mailDate.innerHTML = newMailArray[i].date;
-				fromDate.appendChild(mailDate);
-
-				var mailSubject = document.createElement('div');
-				mailSubject.className = 'subject';
-				mailSubject.innerHTML = 'Subject: ' + newMailArray[i].subject;
-				messageBox.appendChild(mailSubject);
-
-				var mailBody = document.createElement('div');
-				mailBody.className = 'mailBody';
-				mailBody.innerHTML = newMailArray[i].body;
-				mailSubject.appendChild(mailBody);
-
-			}
-
-			//Adds event listener to the messages box that will show the message content upon clicking.
-			var subjectArray = document.getElementsByClassName('messages');
-
-			for (var i = 0; i < subjectArray.length; i++) {
-				subjectArray[i].addEventListener('click', showMessage);
-			}
-
-			function showMessage() {
-
-				var showMess = this.querySelectorAll('.mailBody')[0];
-				if (showMess.style.display === 'none') {
-					showMess.style.display = 'block';
-					this.style.fontWeight = 'normal';
-				} else {
-					showMess.style.display = 'none';
+				for (var i = 0; i <newMessageArr.length; i++) {
+					createMessageBox(newMessageArr[i]);
 				}
+	
+
+
+				var messageArrayNew = document.getElementsByClassName('messages');
+				clickMessage(messageArrayNew);
 
 			}
+
+			//Content for sidecount container
+			totalMessages = newMailArray.length;
+			ttlmess.innerHTML = totalMessages;
+			// unread.innerHTML = totalMessages - read.innerHTML;
 
 			console.log(newMailArray);
 
