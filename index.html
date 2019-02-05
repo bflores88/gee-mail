@@ -18,10 +18,11 @@
 
 			var unreadCount = 0;
 			var totalMessages = 0;
+			var readCount = 0;
 
 			//content for sidecounter
 
-			function initializeCounter(messageCount){
+			function initializeCounter(messageCount) {
 				totalMessages = messageCount
 				ttlmess.innerHTML = totalMessages;
 
@@ -40,12 +41,27 @@
 			function messageRead() {
 				unreadCount--;
 				unread.innerHTML = unreadCount;
+
+				readCount++;
+				read.innerHTML = readCount;
+			}
+
+			function messageUnread() {
+				unreadCount++;
+				unread.innerHTML = unreadCount;
+
+				readCount--;
+				read.innerHTML = readCount;
 			}
 
 			function totalMessagesUpdate(messageCount) {
 				totalMessages = messageCount;
 				ttlmess.innerHTML = totalMessages
 			}
+
+
+
+
 
 			//function to add messages
 
@@ -69,27 +85,42 @@
 				mailDate.innerHTML = messageObject.date;
 				fromDate.appendChild(mailDate);
 
+				var subBody = document.createElement('div');
+				subBody.className = 'subjectBodyBox';
+				messageBox.appendChild(subBody);
+
 				var mailSubject = document.createElement('div');
 				mailSubject.className = 'subject';
 				mailSubject.innerHTML = 'Subject: ' + messageObject.subject;
-				messageBox.appendChild(mailSubject);
+				subBody.appendChild(mailSubject);
+
+				var markAsRead = document.createElement('div');
+				markAsRead.className = 'markReadDiv';
+				subBody.appendChild(markAsRead);
+
+				var readCheckbox = document.createElement('input');
+				readCheckbox.className = 'readBox';
+				readCheckbox.type = 'checkbox';
+				markAsRead.appendChild(readCheckbox);
+
+				var markRead = document.createElement('span');
+				markRead.className = 'markReadText';
+				markRead.innerHTML = 'Mark as read';
+				markAsRead.appendChild(markRead);
 
 				var mailBody = document.createElement('div');
 				mailBody.className = 'mailBody';
 				mailBody.innerHTML = messageObject.body;
-				mailSubject.appendChild(mailBody);
-
-				var readDiv = document.createElement('div');
-				readDiv.className = 'readStatus';
-				readDiv.innerHTML = messageObject.read;
-				mailSubject.appendChild(readDiv);
+				messageBox.appendChild(mailBody);
 
 
-				setClickListener(messageBox);				
+				setClickListener(messageBox);
+
+				setCheckboxListener(readCheckbox);
 			}
 
 			function setClickListener(message) {
-				
+
 				message.addEventListener('click', showMessage);
 			}
 
@@ -102,9 +133,22 @@
 				} else {
 					showMess.style.display = 'none';
 				}
-				
+
 
 			}
+
+			function setCheckboxListener(checkbox) {
+				checkbox.addEventListener('change', readStatUpdate);
+			}
+
+			function readStatUpdate() {
+				if (this.checked) {
+					messageRead();
+				} else {
+					messageUnread();
+				}
+			}
+
 
 			//Sort the contents in the mail array by date from newest to oldest			
 
@@ -114,7 +158,6 @@
 
 			//For loop to consume data and such... initialize counter (orignal number)
 			for (var i = 0; i < newMailArray.length; i++) {
-				newMailArray[i].read = false;
 				createMessageBox(newMailArray[i]);
 			}
 
@@ -167,7 +210,7 @@
 
 		<div class="countstat">
 			<p class="status">Read</p>
-			<p class="statcountRea" id="read">0</p>
+			<p class="statcount" id="read">0</p>
 		</div>
 	</div>
 

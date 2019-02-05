@@ -5,10 +5,7 @@ body{
     font-family: 'Quicksand', sans-serif;
     cursor: crosshair;
     background-color: #fcf5ee;
-
 }
-
-
 
 header{
     background-color: #65c6c4;
@@ -29,7 +26,6 @@ header:hover{
 
 }
 
-
 #main{
     top: 120px;
     margin-left: 200px;
@@ -48,7 +44,6 @@ header:hover{
     width: 15vw;
     padding-top: 50px;
     position: fixed;
-
 }
 
 .message{
@@ -58,7 +53,6 @@ header:hover{
     z-index: 1;
     border: 1px solid lightslategray;
     font-weight: 900;
-
 }
 
 .fromDate{
@@ -80,6 +74,12 @@ header:hover{
     background-color: aquamarine;
 }
 
+.markReadDiv{
+    display: inline;
+    padding-top: 5px;
+    padding-right: 20px;
+}
+
 .readStatus{
     display: none;
 }
@@ -89,6 +89,15 @@ header:hover{
     justify-content: space-between;
 }
 
+.subjectBodyBox{
+    display: flex;
+    justify-content: space-between;
+}
+
+.subjectBodyBox:hover{
+    background-color: lavender;
+}
+
 .subject{
     padding: 5 5 5 5;
     display: flex;
@@ -96,9 +105,6 @@ header:hover{
     flex-direction: column;
 }
 
-.subject:hover{
-    background-color: lightpink;
-}
 
 .countstat{
     display: flex;
