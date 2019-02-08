@@ -26,6 +26,10 @@ header:hover{
 
 }
 
+p{
+    font-size: 12px;
+}
+
 #main{
     top: 120px;
     margin-left: 200px;
@@ -39,7 +43,7 @@ header:hover{
 }
 
 #sidecount{
-    margin-top: 100px;
+    margin-top: 70px;
     margin-left: 10px;
     width: 15vw;
     padding-top: 50px;
