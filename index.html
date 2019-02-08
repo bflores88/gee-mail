@@ -59,10 +59,6 @@
 				ttlmess.innerHTML = totalMessages
 			}
 
-
-
-
-
 			//function to add messages
 
 			function createMessageBox(messageObject) {
@@ -119,6 +115,8 @@
 				setCheckboxListener(readCheckbox);
 			}
 
+			//function to set click listener to show message upon clicking messageBox
+
 			function setClickListener(message) {
 
 				message.addEventListener('click', showMessage);
@@ -136,6 +134,8 @@
 
 
 			}
+
+			//function to set click listener on check box to update read count
 
 			function setCheckboxListener(checkbox) {
 				checkbox.addEventListener('change', readStatUpdate);
